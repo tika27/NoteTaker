@@ -1,10 +1,11 @@
 const fs = require('fs');
+const {promisify} = require('util');
 const express = require("express");
 const path = require("path");
 const unit = require("unit");
 
-const readFileAsync = unit.promisify(fs.readFile);
-const writeFileAsync = unit.promisify(fs.writeFile);
+const readFileAsync = promisify(fs.readFile);
+const writeFileAsync = promisify(fs.writeFile);
 
 
 const app = express();
