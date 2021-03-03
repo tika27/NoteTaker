@@ -2,8 +2,8 @@ const express = require("express");
 const path = require("path");
 const unit = require("unit");
 
-const GenerateHTML = require('./generate/htmlgenerate')
-const apiroutes = require('./generate/generatenotes')
+const htmlRoute = require('./generate/htmlRoute');
+const apiRoute = require('./generate/apiRoute');
 
 
 const app = express();
@@ -16,8 +16,8 @@ app.use(express.json());
 
 app.use(express.static(__dirname + "/public"));
 
-app.use("/api", apiroutes)
-app.use("/", GenerateHTML);
+app.use("/api", apiRoute)
+app.use("/", htmlRoute);
 
 
 app.listen(PORT, () => console.log(`APP listening on PORT: ${PORT}`))

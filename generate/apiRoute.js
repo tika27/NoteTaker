@@ -1,8 +1,9 @@
 const fs = require("fs");
-const route = require("express").Route();
+const express = require("express");
 const {v4: uuid } = require("uuid");
+const app = express()
 
-route.get('/notes', (req, res) => {
+app.get('/notes', (req, res) => {
     fs.readFile('./develop/db/db.json', (err, data) => {
         if (err) {
             console.log(err)
@@ -12,7 +13,7 @@ route.get('/notes', (req, res) => {
     });
 });
 
-route.post('/notes', (req, res) => {
+app.post('/notes', (req, res) => {
     const { title, text } = req.body
     const newNote = { title, text, id: uuid() }
     fs.readFile('./develop/db/db.json', (err, data) => {
@@ -30,7 +31,7 @@ route.post('/notes', (req, res) => {
     })
 })
 
-route.delete('/notes/:id', (req, res) => {
+app.delete('/notes/:id', (req, res) => {
     var id = req.params.id
     console.log(req.params.id)
     fs.readFile('./develop/db/db.json', (err, data) => {
@@ -48,4 +49,4 @@ route.delete('/notes/:id', (req, res) => {
     })
 })
 
-module.exports = route;
+module.exports = app;
